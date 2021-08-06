@@ -22,6 +22,7 @@ body {
   height: 100px;
   background: turquoise;
   margin-right: 1px;
+  transition: height 0.5s ease;
 }
 
 .header {
@@ -30,7 +31,7 @@ body {
   height: 17vh;
   width: 95%;
   margin: 0 2.5%;
-  background: rgb(207, 159, 126);
+  background: rgb(238, 157, 119);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -72,10 +73,40 @@ button:hover {
   width: 25%;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 
 .slide {
   cursor: pointer;
+}
+
+.info-btn {
+  height: 150px;
+  width: 200px;
+  background-color: rgba(230, 52, 52, 0.9);
+  position: absolute;
+  right: 1%;
+  top: 20%;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 20px;
+
+  clip-path: circle(10% at 90% 20%);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.info-btn:hover {
+  clip-path: circle(150% at 100% 0%);
+}
+
+#i {
+  position: absolute;
+  top: 13%;
+  right: 9%;
 }

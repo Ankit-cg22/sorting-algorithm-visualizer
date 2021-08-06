@@ -11,7 +11,7 @@ const barsBoxHeight= window.innerHeight * 0.8;
 const barsBoxWidth = window.innerWidth * 0.9;
 const PRIMARY_COLOR = "turquoise"
 const SECONDARY_COLOR = "orange"
-const FINAL_COLOR ="green"
+
 // const ANIMATION_SPEED_MS = 500/ arrayAmount
 
 export default class SortingVisualizer extends Component {
@@ -21,8 +21,9 @@ export default class SortingVisualizer extends Component {
 
         this.state={
             array : [],
-            arrayAmount : 50 , 
-            animationSpeed : 500,      
+            arrayAmount : 100 , 
+            rootAnimationSpeed : 3500
+    
         }
     }
 
@@ -123,7 +124,7 @@ export default class SortingVisualizer extends Component {
                 setTimeout( () => {
                     barOneStyle.backgroundColor = color 
                     barTwoStyle.backgroundColor = color
-                } , i*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
+                } , i*((this.state.rootAnimationSpeed )/ this.state.arrayAmount))
 
             }else{
 
@@ -135,13 +136,10 @@ export default class SortingVisualizer extends Component {
                     const [barOneInd , newHeight] = animation[i]
                     const barOneStyle = arrayBars[barOneInd].style
                     barOneStyle.height = `${newHeight}px`
-                } , i*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
+                } , i*((this.state.rootAnimationSpeed )/ this.state.arrayAmount))
             }
         }
 
-        setTimeout( () => {
-            this.finalDisplay();
-        } , (animation.length+1)*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
     }
    
     animateSwap(animation)
@@ -164,7 +162,7 @@ export default class SortingVisualizer extends Component {
                 setTimeout( () => {
                     barOneStyle.backgroundColor = color 
                     barTwoStyle.backgroundColor = color
-                } , i*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
+                } , i*((this.state.rootAnimationSpeed )/ this.state.arrayAmount))
 
             }else{
 
@@ -175,23 +173,10 @@ export default class SortingVisualizer extends Component {
                     const barTwoStyle = arrayBars[barTwoInd].style
                     barOneStyle.height = `${barOneHeight}px`
                     barTwoStyle.height = `${barTwoHeight}px`
-                } , i*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
+                } , i*((this.state.rootAnimationSpeed )/ this.state.arrayAmount))
             }
         }
-        setTimeout( () => {
-            this.finalDisplay();
-        } , (animation.length+1)*((5000 - this.state.animationSpeed)/ this.state.arrayAmount))
-    }
-
-    finalDisplay()
-    {
-        // const arrayBars = document.getElementsByClassName('array-bar') //all the bars
-        
-        // for(let i=0;i<arrayBars.length;i++)
-        // {
-        //     const barStyle = arrayBars[i].style;
-        //     barStyle.backgroundColor = FINAL_COLOR;
-        // }
+       
     }
 
 
@@ -202,14 +187,12 @@ export default class SortingVisualizer extends Component {
     }
     resizeSpeed(newSpeed)
     {
-        this.setState({ animationSpeed : newSpeed })
-
+        this.setState({ animationSpeed : newSpeed })      
     }
 
 
     render() {
         const array = this.state.array;
-        console.log("arrayAmout " , this.state.arrayAmount)
         return (
             <div>
                 <div className="header">
@@ -244,13 +227,14 @@ export default class SortingVisualizer extends Component {
                             <div className="slider">
                                 <div className="amount">
                                     <label for="bars">Amount of bars:</label>
-                                    <input className="slide" type="range" id="bars" name="bars" min="10" max="200" onInput={(e)=>this.resizeArrayAmount(e.target.value)} ></input>
+                                    <input className="slide" type="range" id="bars" name="bars" min="25" max="200" value={this.state.arrayAmount} onInput={(e)=>this.resizeArrayAmount(e.target.value)} ></input>
                                 </div>
 
-                                <div className="speed">
-                                <label for="bars">Animation Speed :</label>
-                                    <input className="slide" type="range" id="bars" name="bars" min="250" max="1000" onInput={(e)=>this.resizeSpeed(e.target.value)} ></input>
+                                <div className="info-btn">
+                                    <p id="i">i</p>
+                                    <p>Reduce number of bars to slow down animation speed.</p>
                                 </div>
+
                             </div>
                         </div>
                        
