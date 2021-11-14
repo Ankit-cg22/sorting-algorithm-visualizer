@@ -8,7 +8,7 @@ import {getSelectionSortAnimation} from './sortingAlgorithms/selectionSort';
 
 // const arrayAmount =250;
 const barsBoxHeight= window.innerHeight * 0.8;
-const barsBoxWidth = window.innerWidth * 0.9;
+const barsBoxWidth = window.innerWidth * 0.85;
 const PRIMARY_COLOR = "turquoise"
 const SECONDARY_COLOR = "orange"
 
@@ -194,7 +194,7 @@ export default class SortingVisualizer extends Component {
     render() {
         const array = this.state.array;
         return (
-            <div>
+            <div className="main">
                 <div className="header">
                          <div className="title">
                              <h1>Sorting Algorithm Visualizer</h1>
@@ -229,27 +229,30 @@ export default class SortingVisualizer extends Component {
                                     <label for="bars">Amount of bars:</label>
                                     <input className="slide" type="range" id="bars" name="bars" min="25" max="200" value={this.state.arrayAmount} onInput={(e)=>this.resizeArrayAmount(e.target.value)} ></input>
                                 </div>
-
-                                <div className="info-btn">
-                                    <p id="i">i</p>
-                                    <p>Reduce number of bars to slow down animation speed.</p>
-                                </div>
-
                             </div>
+                        </div>
+
+                        <div className="info-btn">
+                            <p id="i">i</p>
+                            <p>Reduce number of bars to slow down animation speed.</p>
                         </div>
                        
                 </div>
-
-                <div className="bars" style ={{ height : barsBoxHeight , width: barsBoxWidth }}>
-                    {array.map((val,idx) => {
-                        return (
-                            <div className="array-bar" key={idx}
-                            style={{height : `${val}px`,
-                                    width: (barsBoxWidth - (this.state.arrayAmount-1) )/this.state.arrayAmount,
-                                }}>
-                            </div>
-                        )
-                    })}
+                
+    
+                <div className="bars">
+                    <div className="bars2" style ={{ height : barsBoxHeight , width: barsBoxWidth }}>
+                        {array.map((val,idx) => {
+                            return (
+                                <div className="array-bar" key={idx}
+                                style={{height : `${val}px`,
+                                        width: (barsBoxWidth - (this.state.arrayAmount-1) )/this.state.arrayAmount,
+                                    }}>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    
                 </div>
 
             </div>
